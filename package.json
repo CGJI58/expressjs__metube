@@ -1,8 +1,13 @@
 {
   "name": "metube",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/CGJI58/metube",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CGJI58/metube.git"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/init.js"
+  },
   "author": "CGJI58 <leemsk22@naver.com>",
   "license": "MIT",
   "dependencies": {
@@ -17,5 +22,10 @@
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "nodemon": "^2.0.7"
-  }
+  },
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/CGJI58/metube/issues"
+  },
+  "homepage": "https://github.com/CGJI58/metube#readme"
 }
