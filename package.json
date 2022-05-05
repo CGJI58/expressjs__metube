@@ -1,0 +1,8 @@
+{
+  "name": "metube",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/CGJI58/metube",
+  "author": "CGJI58 <leemsk22@naver.com>",
+  "license": "MIT"
+}
