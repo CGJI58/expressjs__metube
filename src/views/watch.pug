@@ -39,11 +39,9 @@ block content
             each comment in video.comments.reverse()
                 li.video__comment(data-id=comment.id)
                     i.fas.fa-comment
-                    span #{comment.text}
+                    span  #{comment.text}
                     span ❌
-
-
 block scripts
     script(src="/static/js/videoPlayer.js")
     if loggedIn
-        script(src="/static/js/commentSection.js")  
+        script(src="/static/js/commentSection.js") 
