@@ -1,11 +1,11 @@
 import User from "../models/User";
-import bcrypt from "bcrypt";
 import fetch from "node-fetch";
+import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 
 export const postJoin = async (req, res) => {
-  const { email, username, password, confirmPassword, name, location } =
+  const { name, username, email, password, confirmPassword, location } =
     req.body;
   const pageTitle = "Join";
   if (password !== confirmPassword) {
@@ -16,28 +16,30 @@ export const postJoin = async (req, res) => {
   }
   const exists = await User.exists({ $or: [{ username }, { email }] });
   if (exists) {
-    const checkExistItem = await User.exists({ email });
-    let existItem = "existItem";
-    if (checkExistItem) existItem = "email";
-    else existItem = "username";
     return res.status(400).render("join", {
       pageTitle,
-      errorMessage: `The ${existItem} is already taken.`,
+      errorMessage: "This username/email is already taken.",
     });
   }
-  await User.create({
-    email,
-    username,
-    password,
-    name,
-    location,
-  });
-  return res.redirect("/login");
+  try {
+    await User.create({
+      name,
+      username,
+      email,
+      password,
+      location,
+    });
+    return res.redirect("/login");
+  } catch (error) {
+    return res.status(400).render("join", {
+      pageTitle,
+      errorMessage: error._message,
+    });
+  }
 };
 
-export const getLogin = (req, res) => {
+export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
-};
 
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -53,12 +55,12 @@ export const postLogin = async (req, res) => {
   if (!ok) {
     return res.status(400).render("login", {
       pageTitle,
-      errorMessage: "Wrong password.",
+      errorMessage: "Wrong password",
     });
   }
   req.session.loggedIn = true;
   req.session.user = user;
-  res.redirect("/");
+  return res.redirect("/");
 };
 
 export const startGithubLogin = (req, res) => {
@@ -70,7 +72,6 @@ export const startGithubLogin = (req, res) => {
   };
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
-  console.log(finalUrl);
   return res.redirect(finalUrl);
 };
 
@@ -112,6 +113,7 @@ export const finishGithubLogin = async (req, res) => {
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
+      // set notification
       return res.redirect("/login");
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -138,6 +140,45 @@ export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
+export const getEdit = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
+export const postEdit = async (req, res) => {
+  const pageTitle = "Edit Profile";
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { newName, newEmail, newUsername, newLocation },
+  } = req;
+  const checkEmailAlreadyExists = await User.findOne({
+    email: newEmail,
+    _id: { $ne: _id },
+  });
+  const checkUsernameAlreadyExists = await User.findOne({
+    username: newUsername,
+    _id: { $ne: _id },
+  });
 
-export const edit = (req, res) => res.render("edit");
+  if (!checkEmailAlreadyExists && !checkUsernameAlreadyExists) {
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        name: newName,
+        email: newEmail,
+        username: newUsername,
+        location: newLocation,
+      },
+      { new: true }
+    );
+    req.session.user = updatedUser;
+    return res.redirect("/users/edit");
+  } else {
+    return res.status(400).render("edit-profile", {
+      pageTitle,
+      errorMessage: "This username/email is already taken.",
+    });
+  }
+};
+
 export const see = (req, res) => res.send("See User");
