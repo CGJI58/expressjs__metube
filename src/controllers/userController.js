@@ -140,16 +140,19 @@ export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
+
 export const getEdit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
+
 export const postEdit = async (req, res) => {
   const pageTitle = "Edit Profile";
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { newName, newEmail, newUsername, newLocation },
+    file,
   } = req;
   const checkEmailAlreadyExists = await User.findOne({
     email: newEmail,
@@ -164,6 +167,7 @@ export const postEdit = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       _id,
       {
+        avatarUrl: file ? file.path : avatarUrl,
         name: newName,
         email: newEmail,
         username: newUsername,
@@ -181,4 +185,53 @@ export const postEdit = async (req, res) => {
   }
 };
 
-export const see = (req, res) => res.send("See User");
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+  if (!ok) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incorrect",
+    });
+  }
+  if (newPassword !== newPasswordConfirmation) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+  return res.redirect("/users/logout");
+};
+
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).populate({
+    path: "videos",
+    populate: {
+      path: "owner",
+      model: "User",
+    },
+  });
+  if (!user) {
+    return res.status(404).render("404", { pageTitle: "User not found." });
+  }
+  return res.render("users/profile", {
+    pageTitle: user.name,
+    user,
+  });
+};
