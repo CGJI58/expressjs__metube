@@ -1,5 +1,5 @@
 Arguments: 
-  /home/cgji58/.nvm/versions/node/v12.18.2/bin/node /mnt/c/Program Files (x86)/Yarn/bin/yarn.js install
+  /home/cgji58/.nvm/versions/node/v12.18.2/bin/node /mnt/c/Program Files (x86)/Yarn/bin/yarn.js add regenerator-runtime@0.13.7
 
 PATH: 
   /home/cgji58/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/home/cgji58/.nvm/versions/node/v12.18.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/NetSarang/Xshell 6/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/MATLAB/R2020a/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files (x86)/Yarn/bin/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Users/dell/AppData/Local/Programs/Python/Python36/Scripts/:/mnt/c/Users/dell/AppData/Local/Programs/Python/Python36/:/mnt/c/Users/dell/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Bandizip/:/mnt/c/Users/dell/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/dell/AppData/Local/atom/bin:/mnt/c/Users/dell/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/dell/.dotnet/tools:/mnt/c/Users/dell/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/dell/AppData/Roaming/npm:/mnt/c/Users/dell/AppData/Local/Yarn/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.npmjs.org/css-loader: ETIMEDOUT
+  Error: https://registry.npmjs.org/regenerator-runtime: ETIMEDOUT
       at Timeout._onTimeout (/mnt/c/Program Files (x86)/Yarn/lib/cli.js:141545:19)
       at listOnTimeout (internal/timers.js:549:17)
       at processTimers (internal/timers.js:492:7)
@@ -28,8 +28,8 @@ npm manifest:
       "url": "git+https://github.com/CGJI58/metube.git"
     },
     "scripts": {
-      "dev": "nodemon --exec babel-node src/init.js",
-      "assets": "webpack --config webpack.config.js"
+      "dev:server": "nodemon",
+      "dev:assets": "webpack"
     },
     "author": "CGJI58 <leemsk22@naver.com>",
     "license": "MIT",
@@ -53,9 +53,10 @@ npm manifest:
       "@babel/preset-env": "^7.13.10",
       "babel-loader": "^8.2.5",
       "css-loader": "^5.2.2",
+      "mini-css-extract-plugin": "1.5.0",
       "nodemon": "^2.0.7",
-      "sass": "^1.32.10",
-      "sass-loader": "^11.0.1",
+      "sass": "1.32.10",
+      "sass-loader": "11.0.1",
       "style-loader": "^2.0.0",
       "webpack": "^5.72.1",
       "webpack-cli": "^4.9.2"
@@ -1642,7 +1643,7 @@ Lockfile:
     dependencies:
       is-regex "^1.0.3"
   
-  chokidar@^3.5.2:
+  "chokidar@>=3.0.0 <4.0.0", chokidar@^3.5.2:
     version "3.5.3"
     resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
     integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
@@ -1861,18 +1862,20 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
     integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
   
-  css-loader@^6.7.1:
-    version "6.7.1"
-    resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-6.7.1.tgz#e98106f154f6e1baf3fc3bc455cb9981c1d5fd2e"
-    integrity sha512-yB5CNFa14MbPJcomwNh3wLThtkZgcNyI2bNMRt8iE5Z8Vwl7f8vQXFAzn2HDOJvtDq2NTZBUGMSUNNyrv3/+cw==
+  css-loader@^5.2.2:
+    version "5.2.7"
+    resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-5.2.7.tgz#9b9f111edf6fb2be5dc62525644cbc9c232064ae"
+    integrity sha512-Q7mOvpBNBG7YrVGMxRxcBJZFL75o+cH2abNASdibkj/fffYD8qWbInZrD0S9ccI6vZclF3DsHE7njGlLtaHbhg==
     dependencies:
       icss-utils "^5.1.0"
-      postcss "^8.4.7"
+      loader-utils "^2.0.0"
+      postcss "^8.2.15"
       postcss-modules-extract-imports "^3.0.0"
       postcss-modules-local-by-default "^4.0.0"
       postcss-modules-scope "^3.0.0"
       postcss-modules-values "^4.0.0"
-      postcss-value-parser "^4.2.0"
+      postcss-value-parser "^4.1.0"
+      schema-utils "^3.0.0"
       semver "^7.3.5"
   
   cssesc@^3.0.0:
@@ -2857,6 +2860,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
     integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
   
+  klona@^2.0.4:
+    version "2.0.5"
+    resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.5.tgz#d166574d90076395d9963aa7a928fabb8d76afbc"
+    integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
+  
   kruptein@^3.0.0:
     version "3.0.4"
     resolved "https://registry.yarnpkg.com/kruptein/-/kruptein-3.0.4.tgz#68dcd32ee9e6b611c86615a4616fee2ca3b9b769"
@@ -2993,6 +3001,15 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-1.0.1.tgz#4923538878eef42063cb8a3e3b0798781487ab1b"
     integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
+  
+  mini-css-extract-plugin@1.5.0:
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.5.0.tgz#69bee3b273d2d4ee8649a2eb409514b7df744a27"
+    integrity sha512-SIbuLMv6jsk1FnLIU5OUG/+VMGUprEjM1+o2trOAx8i5KOKMrhyezb1dJ4Ugsykb8Jgq8/w5NEopy6escV9G7g==
+    dependencies:
+      loader-utils "^2.0.0"
+      schema-utils "^3.0.0"
+      webpack-sources "^1.1.0"
   
   minimalistic-assert@^1.0.0:
     version "1.0.1"
@@ -3459,12 +3476,12 @@ Lockfile:
       cssesc "^3.0.0"
       util-deprecate "^1.0.2"
   
-  postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
+  postcss-value-parser@^4.1.0:
     version "4.2.0"
     resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
     integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
   
-  postcss@^8.4.7:
+  postcss@^8.2.15:
     version "8.4.14"
     resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.14.tgz#ee9274d5622b4858c1007a74d76e42e56fd21caf"
     integrity sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==
@@ -3850,6 +3867,21 @@ Lockfile:
     dependencies:
       sparse-bitfield "^3.0.3"
   
+  sass-loader@11.0.1:
+    version "11.0.1"
+    resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-11.0.1.tgz#8672f896593466573b904f47693e0695368e38c9"
+    integrity sha512-Vp1LcP4slTsTNLEiDkTcm8zGN/XYYrZz2BZybQbliWA8eXveqA/AxsEjllQTpJbg2MzCsx/qNO48sHdZtOaxTw==
+    dependencies:
+      klona "^2.0.4"
+      neo-async "^2.6.2"
+  
+  sass@1.32.10:
+    version "1.32.10"
+    resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.10.tgz#d40da4e20031b450359ee1c7e69bc8cc89569241"
+    integrity sha512-Nx0pcWoonAkn7CRp0aE/hket1UP97GiR1IFw3kcjV3pnenhWgZEWUf0ZcfPOV2fK52fnOcK3JdC/YYZ9E47DTQ==
+    dependencies:
+      chokidar ">=3.0.0 <4.0.0"
+  
   schema-utils@^2.6.5:
     version "2.7.1"
     resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-2.7.1.tgz#1ca4f32d1b24c590c203b8e7a50bf0ea4cd394d7"
@@ -3859,7 +3891,7 @@ Lockfile:
       ajv "^6.12.4"
       ajv-keywords "^3.5.2"
   
-  schema-utils@^3.1.0, schema-utils@^3.1.1:
+  schema-utils@^3.0.0, schema-utils@^3.1.0, schema-utils@^3.1.1:
     version "3.1.1"
     resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-3.1.1.tgz#bc74c4b6b6995c1d88f76a8b77bea7219e0c8281"
     integrity sha512-Y5PQxS4ITlC+EahLuXaY86TXfR7Dc5lw294alXOq86JAHCihAIZfqv8nNCWvaEJvaC51uN9hbLGeV0cFBdH+Fw==
@@ -3986,6 +4018,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
     integrity sha1-CzpmK10Ewxd7GSa+qCsD+Dei70E=
   
+  source-list-map@^2.0.0:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
+    integrity sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
+  
   source-map-js@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
@@ -3999,7 +4036,7 @@ Lockfile:
       buffer-from "^1.0.0"
       source-map "^0.6.0"
   
-  source-map@^0.6.0, source-map@^0.6.1:
+  source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
     version "0.6.1"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
     integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
@@ -4090,6 +4127,14 @@ Lockfile:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
     integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+  
+  style-loader@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-2.0.0.tgz#9669602fd4690740eaaec137799a03addbbc393c"
+    integrity sha512-Z0gYUJmzZ6ZdRUqpg1r8GsaFKypE+3xAzuFeMuoHgjc9KZv3wMyCRjQIWEbhoFSq7+7yoHXySDJyyWQaPajeiQ==
+    dependencies:
+      loader-utils "^2.0.0"
+      schema-utils "^3.0.0"
   
   supports-color@^5.3.0, supports-color@^5.5.0:
     version "5.5.0"
@@ -4387,6 +4432,14 @@ Lockfile:
     dependencies:
       clone-deep "^4.0.1"
       wildcard "^2.0.0"
+  
+  webpack-sources@^1.1.0:
+    version "1.4.3"
+    resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.4.3.tgz#eedd8ec0b928fbf1cbfe994e22d2d890f330a933"
+    integrity sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==
+    dependencies:
+      source-list-map "^2.0.0"
+      source-map "~0.6.1"
   
   webpack-sources@^3.2.3:
     version "3.2.3"
