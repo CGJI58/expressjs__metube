@@ -6,12 +6,17 @@
     "url": "git+https://github.com/CGJI58/metube.git"
   },
   "scripts": {
+    "start": "node build/init.js",
+    "build": "npm run build:server && npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
-    "dev:assets": "webpack"
+    "dev:assets": "webpack --mode=development -w"
   },
   "author": "CGJI58 <leemsk22@naver.com>",
   "license": "MIT",
   "dependencies": {
+    "@babel/cli": "^7.17.10",
     "@ffmpeg/core": "^0.8.5",
     "@ffmpeg/ffmpeg": "^0.9.7",
     "bcrypt": "^5.0.1",

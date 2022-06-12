@@ -9,7 +9,6 @@ form {
   }
 }
 
-// input:not([type="range"])
 input:not(input[type="range"]),
 input[type="submit"] {
   all: unset;
@@ -19,8 +18,10 @@ input[type="submit"] {
   background-color: black;
   margin-bottom: 5px;
   font-size: 16px;
-  color: white;
+  font-weight: bold;
+  color: whitesmoke;
   width: 90%;
+  cursor: pointer;
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
@@ -30,7 +31,7 @@ input[type="submit"],
 .social__btn {
   border-radius: 5px;
   padding: 12px 20px;
-  background-color: white !important;
+  background-color: whitesmoke !important;
   color: rgba($color: $red, $alpha: 1) !important;
   text-align: center !important;
   cursor: pointer;

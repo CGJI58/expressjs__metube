@@ -25,6 +25,8 @@ block content
         small.video__owner Uploaded by 
             a(href=`/users/${video.owner._id}`)=video.owner.name
         small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        small.video__hashtags=video.hashtags
+        small.video__description=video.description
         if String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) Edit Video &rarr;
             br
@@ -32,7 +34,7 @@ block content
     if loggedIn
         div.video__add-comments
             form.video__comment-form#commentForm
-                textarea(cols="30", rows="10", placeholder="Write a nice commment...")
+                textarea(cols="30", rows="6", placeholder="Write a nice commment...")
                 button Add Comment
     div.video__comments
         ul
