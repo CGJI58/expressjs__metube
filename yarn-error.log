@@ -1,5 +1,5 @@
 Arguments: 
-  /home/cgji58/.nvm/versions/node/v12.18.2/bin/node /mnt/c/Program Files (x86)/Yarn/bin/yarn.js add regenerator-runtime@0.13.7
+  /home/cgji58/.nvm/versions/node/v12.18.2/bin/node /mnt/c/Program Files (x86)/Yarn/bin/yarn.js add @ffmpeg/core@0.8.5
 
 PATH: 
   /home/cgji58/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/home/cgji58/.nvm/versions/node/v12.18.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/NetSarang/Xshell 6/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/MATLAB/R2020a/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files (x86)/Yarn/bin/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Users/dell/AppData/Local/Programs/Python/Python36/Scripts/:/mnt/c/Users/dell/AppData/Local/Programs/Python/Python36/:/mnt/c/Users/dell/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Bandizip/:/mnt/c/Users/dell/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/dell/AppData/Local/atom/bin:/mnt/c/Users/dell/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/dell/.dotnet/tools:/mnt/c/Users/dell/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/dell/AppData/Roaming/npm:/mnt/c/Users/dell/AppData/Local/Yarn/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.npmjs.org/regenerator-runtime: ETIMEDOUT
+  Error: https://registry.npmjs.org/@ffmpeg%2fcore: ETIMEDOUT
       at Timeout._onTimeout (/mnt/c/Program Files (x86)/Yarn/lib/cli.js:141545:19)
       at listOnTimeout (internal/timers.js:549:17)
       at processTimers (internal/timers.js:492:7)
@@ -40,12 +40,14 @@ npm manifest:
       "connect-mongo": "^4.6.0",
       "dotenv": "^8.2.0",
       "express": "^4.17.1",
+      "express-flash": "0.0.2",
       "express-session": "^1.17.1",
       "mongoose": "^5.12.3",
       "morgan": "^1.10.0",
       "multer": "^1.4.4",
       "node-fetch": "^2.6.1",
-      "pug": "^3.0.2"
+      "pug": "^3.0.2",
+      "regenerator-runtime": "0.13.7"
     },
     "devDependencies": {
       "@babel/core": "^7.13.10",
@@ -1775,6 +1777,11 @@ Lockfile:
       write-file-atomic "^3.0.0"
       xdg-basedir "^4.0.0"
   
+  connect-flash@0.1.x:
+    version "0.1.1"
+    resolved "https://registry.yarnpkg.com/connect-flash/-/connect-flash-0.1.1.tgz#d8630f26d95a7f851f9956b1e8cc6732f3b6aa30"
+    integrity sha512-2rcfELQt/ZMP+SM/pG8PyhJRaLKp+6Hk2IUBNkEit09X+vwn3QsAL3ZbYtxUn7NVPzbMTSLRDhqe0B/eh30RYA==
+  
   connect-mongo@^4.6.0:
     version "4.6.0"
     resolved "https://registry.yarnpkg.com/connect-mongo/-/connect-mongo-4.6.0.tgz#1bf62868efc9f28ecf1459ae9a9d6caaf90ae8a6"
@@ -2150,6 +2157,13 @@ Lockfile:
       onetime "^5.1.2"
       signal-exit "^3.0.3"
       strip-final-newline "^2.0.0"
+  
+  express-flash@0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/express-flash/-/express-flash-0.0.2.tgz#23d1a8bcf3f90d707928e489f96869ecad0acda2"
+    integrity sha512-QVUR0ZZRCaa8+iPHoUQaQJrQWcQuK/Q+19M7IUIdIEtvwhrA/ifHT7y1CVJI41YfGiOQnbGtn3uvd2vOdgu58A==
+    dependencies:
+      connect-flash "0.1.x"
   
   express-session@^1.17.1:
     version "1.17.3"
@@ -3744,6 +3758,11 @@ Lockfile:
     version "1.4.2"
     resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
     integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
+  
+  regenerator-runtime@0.13.7:
+    version "0.13.7"
+    resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
+    integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
   
   regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
     version "0.13.9"
