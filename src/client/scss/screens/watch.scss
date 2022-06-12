@@ -27,10 +27,30 @@
   margin: 0 auto;
   margin-top: 20px;
   .video__comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     padding: 10px;
     border-radius: 9999px;
     background-color: white;
-    color: black;
     margin-bottom: 10px;
+    color: black;
+    :first-child {
+      width: 10%;
+      left: 10px;
+    }
+    :nth-child(2) {
+      width: 80%;
+      text-shadow: 2px 2px 1px white;
+      overflow: hidden;
+      word-break: break-all;
+    }
+    :last-child {
+      text-align: end;
+      width: 10%;
+      right: 10px;
+      cursor: pointer;
+    }
   }
 }
